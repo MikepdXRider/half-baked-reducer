@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
 
@@ -10,81 +10,81 @@ beforeEach(() => {
   render(<App />)
 })
 
-it('should increment the counter when increment pressed', () => {
+it('should increment the counter when increment pressed', async () => {
   const counter = screen.getByRole('heading')
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 
   const incrementButton = screen.getByRole('button', { name: 'increment' })
   userEvent.click(incrementButton)
   expect(counter).toHaveTextContent('1')
-  expect(counter).toHaveStyle(`color: ${green}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${green}`))
 
   userEvent.click(incrementButton)
   expect(counter).toHaveTextContent('2')
-  expect(counter).toHaveStyle(`color: ${green}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${green}`))
 })
 
-it('should decrement the counter when decrement pressed', () => {
+it('should decrement the counter when decrement pressed', async () => {
   const counter = screen.getByRole('heading')
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 
   const decrementButton = screen.getByRole('button', { name: 'decrement' })
   userEvent.click(decrementButton)
   expect(counter).toHaveTextContent('-1')
-  expect(counter).toHaveStyle(`color: ${red}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${red}`))
 
   userEvent.click(decrementButton)
   expect(counter).toHaveTextContent('-2')
-  expect(counter).toHaveStyle(`color: ${red}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${red}`))
 })
 
-it('should reset the counter when reset is pressed', () => {
+it('should reset the counter when reset is pressed', async () => {
   const counter = screen.getByRole('heading')
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 
   const decrementButton = screen.getByRole('button', { name: 'decrement' })
   userEvent.click(decrementButton)
   expect(counter).toHaveTextContent('-1')
-  expect(counter).toHaveStyle(`color: ${red}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${red}`))
 
   const resetButton = screen.getByRole('button', { name: 'reset' })
   userEvent.click(resetButton)
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 })
 
-it('should count and reset all the things', () => {
+it('should count and reset all the things', async () => {
   const counter = screen.getByRole('heading')
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 
   const incrementButton = screen.getByRole('button', { name: 'increment' })
   userEvent.click(incrementButton)
   expect(counter).toHaveTextContent('1')
-  expect(counter).toHaveStyle(`color: ${green}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${green}`))
 
   userEvent.click(incrementButton)
   expect(counter).toHaveTextContent('2')
-  expect(counter).toHaveStyle(`color: ${green}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${green}`))
 
   const resetButton = screen.getByRole('button', { name: 'reset' })
   userEvent.click(resetButton)
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 
   const decrementButton = screen.getByRole('button', { name: 'decrement' })
   userEvent.click(decrementButton)
   expect(counter).toHaveTextContent('-1')
-  expect(counter).toHaveStyle(`color: ${red}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${red}`))
 
   userEvent.click(decrementButton)
   expect(counter).toHaveTextContent('-2')
-  expect(counter).toHaveStyle(`color: ${red}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${red}`))
 
   userEvent.click(resetButton)
   expect(counter).toHaveTextContent('0')
-  expect(counter).toHaveStyle(`color: ${pink}`)
+  await waitFor(() => expect(counter).toHaveStyle(`color: ${pink}`))
 })

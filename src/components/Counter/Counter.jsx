@@ -2,9 +2,7 @@ import { useEffect, useState, useReducer } from 'react'
 
 
 // ☝ It's good practice to define/declare initial states before passing them to the relative hooks.
-const initialState = {
-  count: 0
-}
+const initialState = 0;
 
 const pinkRGB = `rgb(236, 72, 153)`
 
@@ -18,15 +16,15 @@ function reducer(state, actionObj){
   switch (actionObj.type) {
     case 'increment': {
           // the useReducer state is updated by the reducer return. We no longer use a 'setState' type function here.
-        return { count: state.count + 1 }
+        return state + 1 
     }
     case 'decrement': {
           // the useReducer state is updated by the reducer return. We no longer use a 'setState' type function here.
-        return { count: state.count - 1 }
+        return state - 1 
     }
     case 'reset': {
           // the useReducer state is updated by the reducer return. We no longer use a 'setState' type function here.
-        return { count: 0 }
+        return 0
     }
     default: {
       // How do we trigger this? Do we exclude an action object or a type key/value from the action object?
@@ -45,15 +43,15 @@ export default function Counter() {
 
   // useEffect, which updates the currentColor state when the count state updates. 
   useEffect(() => {
-    if (count.count === 0) {
+    if (count === 0) {
       setCurrentColor(pinkRGB);
     }
     
-    if (count.count > 0) {
+    if (count > 0) {
       setCurrentColor(`rgb(52, 211, 153)`);
     }
     
-    if (count.count < 0) {
+    if (count < 0) {
       setCurrentColor(`rgb(239, 68, 68)`);
     }
   }, [count]);
@@ -79,7 +77,7 @@ export default function Counter() {
   return (
     <main className="bg-black bg-opacity-90 min-h-screen flex flex-col items-center justify-center text-4xl text-pink-500">
       <h1 className="mb-5" style={{ color: currentColor }}>
-        {count.count}
+        {count}
       </h1>
       <div className="flex w-1/2 justify-around">
         <button
